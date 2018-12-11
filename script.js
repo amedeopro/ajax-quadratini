@@ -6,7 +6,7 @@ $(document).ready(function(){
       method: 'GET',
       success: function(data){
         $('.box').click(function(){
-          for (var i = 0; i < 1; i++) {
+          for (var i = 0; i < 36; i++) {
             var numero = data.response
             console.log(data.response)
             if (numero <= 5) {
