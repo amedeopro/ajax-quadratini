@@ -6,14 +6,18 @@ $(document).ready(function(){
       method: 'GET',
       success: function(data){
         $('.box').click(function(){
+          for (var i = 0; i < 1; i++) {
+            var numero = data.response
+            console.log(data.response)
+            if (numero <= 5) {
+              $(this).addClass('bg-giallo');
+            } else if (numero > 5) {
+              $(this).addClass('bg-verde');
+            }
 
-          var numero = data.response
-          var numeroInserito = $(this).text(numero);
-          if (numero <= 5) {
-            $(this).addClass('bg-giallo');
-          } else if (numero > 5) {
-            $(this).addClass('bg-verde');
-          }
+            var numeroInserito = $(this).text(numero);
+        }
+
 
        })
       },
