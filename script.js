@@ -1,31 +1,40 @@
 $(document).ready(function(){
 
-  $('.box').click(function(){
+var posiz = []; //creo un array dove andrò ad inserire la posizione del numero generato
 
-    var questoElemento = $(this)
+  $('.box').one().click(function(){
+    var posizElem = $(this).index(); //prendo la posizione del numero generato
+    var questoElemento = $(this) //mi creo questa variabile prima in modo che possa riutilizzarla all'interno
+      if (posiz.includes(posizElem)) {  //controllo se la posizione è già inclusa nell'array allora ti blocco
 
-      $.ajax({
-        url: 'https://www.boolean.careers/api/random/int',
-        method: 'GET',
-        success: function(data){
-            var numero = data.response;
-            console.log(numero);
+       alert('hai già cliccato');
 
-            questoElemento.text(numero);
+     } else{ // altrimenti pusho la posizione nell'array ed eseguo la chiamata AJAX
 
-              if (numero <= 5) {
-                  questoElemento.addClass('bg-giallo');
-                } else if (numero > 5) {
-                  questoElemento.addClass('bg-verde');
-                }
+           posiz.push(posizElem);
+
+            $.ajax({
+              url: 'https://www.boolean.careers/api/random/int',
+              method: 'GET',
+              success: function(data){
+                  var numero = data.response;
+                  console.log(numero);
+
+                  questoElemento.text(numero);
+
+                    if (numero <= 5) {
+                        questoElemento.addClass('bg-giallo');
+                      } else if (numero > 5) {
+                        questoElemento.addClass('bg-verde');
+                      }
 
 
 
-        },
-        error: function(){
-          alert('si è verificato un errore');
-        }
+              },
+              error: function(){
+                alert('si è verificato un errore');
+              }
+            });
+      }
       });
-
-  });
-  })
+      })
